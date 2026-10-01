@@ -58,8 +58,8 @@ int main() {
 
 	uintptr_t info_off = module_base + 0x21A0F8;
 
-	ReadProcessMemory(proc, (LPCVOID)info_off, &SAMP_INFO, sizeof(SAMP_INFO), NULL);
-	if (SAMP_INFO == 0) {
+	BOOL ok = ReadProcessMemory(proc, (LPCVOID)info_off, &SAMP_INFO, sizeof(SAMP_INFO), NULL);
+	if (!ok) {
 		MessageBoxA(NULL, "The program has closed after a critical error has occurred. (0xDADFCAA4)", "Error", MB_ICONEXCLAMATION);
 		return 0;
 	}
