@@ -54,7 +54,7 @@ int main() {
 	DWORD SAMP_SETTINGS;
 
 	float distance;
-	unsigned char see_through_walls, show_nametags;
+	unsigned char no_nametags_behind_walls, show_nametags;
 
 	uintptr_t info_off = module_base + 0x21A0F8;
 
@@ -72,12 +72,12 @@ int main() {
 	uintptr_t byteNoNametagsBehindWalls = SAMP_SETTINGS + 0x2F;
 	uintptr_t byteShowNameTags = SAMP_SETTINGS + 0x38;
 
-	ReadProcessMemory(proc, (LPCVOID)byteNoNametagsBehindWalls, &see_through_walls, sizeof(see_through_walls), NULL);
-	if (see_through_walls == 0) { // well, it'll set it to my values... therefore, i can make it open to run/stop
-		see_through_walls = 1;
-		show_nametags = 1; distance = 2000.f;
+	ReadProcessMemory(proc, (LPCVOID)byteNoNametagsBehindWalls, &no_nametags_behind_walls, sizeof(no_nametags_behind_walls), NULL);
+	if (no_nametags_behind_walls == 0) { // well, it'll set it to my values... therefore, i can make it open to run/stop
+		no_nametags_behind_walls = 1;
+		show_nametags = 1; distance = 80.f;
 
-		WriteProcessMemory(proc, (LPVOID)byteNoNametagsBehindWalls, &see_through_walls, sizeof(see_through_walls), NULL);
+		WriteProcessMemory(proc, (LPVOID)byteNoNametagsBehindWalls, &no_nametags_behind_walls, sizeof(no_nametags_behind_walls), NULL);
 		WriteProcessMemory(proc, (LPVOID)fNameTagsDistance, &distance, sizeof(distance), NULL);
 		WriteProcessMemory(proc, (LPVOID)byteShowNameTags, &show_nametags, sizeof(show_nametags), NULL);
 
@@ -85,10 +85,10 @@ int main() {
 		return 0;
 	}
 	else {
-		see_through_walls = 0;
-		show_nametags = 1; distance = 80.f;
+		no_nametags_behind_walls = 0;
+		show_nametags = 1; distance = 2000.f;
 
-		WriteProcessMemory(proc, (LPVOID)byteNoNametagsBehindWalls, &see_through_walls, sizeof(see_through_walls), NULL);
+		WriteProcessMemory(proc, (LPVOID)byteNoNametagsBehindWalls, &no_nametags_behind_walls, sizeof(no_nametags_behind_walls), NULL);
 		WriteProcessMemory(proc, (LPVOID)fNameTagsDistance, &distance, sizeof(distance), NULL);
 		WriteProcessMemory(proc, (LPVOID)byteShowNameTags, &show_nametags, sizeof(show_nametags), NULL);
 
