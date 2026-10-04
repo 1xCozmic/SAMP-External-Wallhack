@@ -73,7 +73,7 @@ int main() {
 	uintptr_t byteShowNameTags = SAMP_SETTINGS + 0x38;
 
 	ReadProcessMemory(proc, (LPCVOID)byteNoNametagsBehindWalls, &no_nametags_behind_walls, sizeof(no_nametags_behind_walls), NULL);
-	if (no_nametags_behind_walls == 0) { // well, it'll set it to my values... therefore, i can make it open to run/stop
+	if (no_nametags_behind_walls == 0) {
 		no_nametags_behind_walls = 1;
 		show_nametags = 1; distance = 80.f;
 
